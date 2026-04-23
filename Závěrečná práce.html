@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>STAVION | Stavebniny a technika</title>
+  <meta name="description" content="STAVION - školní projekt zaměřený na stavebniny, nářadí a stavební techniku." />
+  <meta name="author" content="Daniel Vaculík + ChatGPT GPT-5.4 Thinking" />
+  <style>
+    :root{
+      --red:#c1121f;
+      --red-dark:#8f0d17;
+      --red-light:#fdecee;
+      --white:#ffffff;
+      --gray:#f5f5f7;
+      --text:#1f1f1f;
+      --muted:#666;
+      --shadow:0 10px 28px rgba(0,0,0,0.08);
+      --radius:20px;
+      --max:1200px;
+    }
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:Arial, Helvetica, sans-serif;
+      scroll-behavior:smooth;
+    }
+
+    body{
+      background:var(--white);
+      color:var(--text);
+      line-height:1.6;
+    }
+
+    a{
+      text-decoration:none;
+      color:inherit;
+    }
+
+    img{
+      max-width:100%;
+      display:block;
+    }
+
+    .container{
+      width:min(92%, var(--max));
+      margin:0 auto;
+    }
+
+    header{
+      position:sticky;
+      top:0;
+      z-index:1000;
+      background:rgba(255,255,255,0.96);
+      backdrop-filter:blur(8px);
+      border-bottom:1px solid #ececec;
+    }
+
+    .navbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:20px;
+      flex-wrap:wrap;
+      padding:18px 0;
+    }
+
+    .logo{
+      font-size:30px;
+      font-weight:900;
+      color:var(--red);
+      letter-spacing:1px;
+    }
+
+    .menu{
+      display:flex;
+      flex-wrap:wrap;
+      gap:18px;
+      align-items:center;
+    }
+
+    .menu a{
+      font-weight:700;
+      color:#333;
+      transition:0.2s;
+    }
+
+    .menu a:hover{
+      color:var(--red);
+    }
+
+    .menu .cta{
+      background:var(--red);
+      color:#fff;
+      padding:11px 18px;
+      border-radius:999px;
+    }
+
+    .menu .cta:hover{
+      background:var(--red-dark);
+      color:#fff;
+    }
+
+    /* background image */
+    .hero{
+      background:
+        linear-gradient(rgba(193,18,31,0.88), rgba(114,10,19,0.9)),
+        url("https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1600&q=80") center/cover no-repeat;
+      color:#fff;
+      padding:100px 0 80px;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.15fr 0.85fr;
+      gap:28px;
+      align-items:center;
+    }
+
+    .hero-badge{
+      display:inline-block;
+      background:rgba(255,255,255,0.13);
+      border:1px solid rgba(255,255,255,0.2);
+      padding:10px 16px;
+      border-radius:999px;
+      margin-bottom:18px;
+      font-size:14px;
+      font-weight:700;
+    }
+
+    h1{
+      font-size:56px;
+      line-height:1.08;
+      margin-bottom:18px;
+    }
+
+    .hero p{
+      font-size:18px;
+      color:#f4f1f1;
+      margin-bottom:26px;
+      max-width:700px;
+    }
+
+    .hero-buttons{
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
+    }
+
+    .btn{
+      display:inline-block;
+      padding:14px 22px;
+      border-radius:999px;
+      font-weight:800;
+      transition:0.2s;
+    }
+
+    .btn-white{
+      background:#fff;
+      color:var(--red);
+    }
+
+    .btn-white:hover{
+      background:#f1f1f1;
+      transform:translateY(-2px);
+    }
+
+    .btn-outline{
+      border:2px solid #fff;
+      color:#fff;
+    }
+
+    .btn-outline:hover{
+      background:#fff;
+      color:var(--red);
+      transform:translateY(-2px);
+    }
+
+    .hero-card{
+      background:rgba(255,255,255,0.12);
+      border:1px solid rgba(255,255,255,0.2);
+      border-radius:24px;
+      padding:28px;
+      backdrop-filter:blur(8px);
+      box-shadow:var(--shadow);
+    }
+
+    .hero-card h3{
+      font-size:24px;
+      margin-bottom:14px;
+    }
+
+    .hero-card ul{
+      padding-left:18px;
+    }
+
+    .hero-card li{
+      margin-bottom:10px;
+      font-weight:700;
+    }
+
+    .stats{
+      margin-top:-30px;
+      position:relative;
+      z-index:3;
+    }
+
+    .stats-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:18px;
+    }
+
+    .stat{
+      background:#fff;
+      border-radius:20px;
+      padding:22px;
+      text-align:center;
+      box-shadow:var(--shadow);
+      border-top:4px solid var(--red);
+    }
+
+    .stat h3{
+      font-size:30px;
+      color:var(--red);
+      margin-bottom:4px;
+    }
+
+    .stat p{
+      color:var(--muted);
+      font-weight:700;
+    }
+
+    section{
+      padding:80px 0;
+    }
+
+    .section-gray{
+      background:var(--gray);
+    }
+
+    .section-title{
+      text-align:center;
+      max-width:780px;
+      margin:0 auto 42px;
+    }
+
+    .section-title span{
+      color:var(--red);
+      text-transform:uppercase;
+      font-size:13px;
+      font-weight:800;
+      letter-spacing:1px;
+    }
+
+    h2{
+      font-size:40px;
+      line-height:1.15;
+      margin:12px 0 14px;
+    }
+
+    .section-title p{
+      color:var(--muted);
+      font-size:17px;
+    }
+
+    h3{
+      font-size:28px;
+      margin-bottom:12px;
+    }
+
+    .about-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:28px;
+      align-items:center;
+    }
+
+    .about-box{
+      background:#fff;
+      border-radius:24px;
+      padding:30px;
+      box-shadow:var(--shadow);
+    }
+
+    .about-box p{
+      color:var(--muted);
+      margin-bottom:14px;
+    }
+
+    .check-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:18px;
+    }
+
+    .check-item{
+      background:var(--red-light);
+      border-left:4px solid var(--red);
+      padding:12px 14px;
+      border-radius:12px;
+      font-weight:700;
+    }
+
+    .about-image{
+      background:#fff;
+      border-radius:24px;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+    }
+
+    .about-image img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      min-height:380px;
+    }
+
+    .category-head{
+      margin:40px 0 18px;
+    }
+
+    .category-head p{
+      color:var(--muted);
+    }
+
+    .product-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:24px;
+    }
+
+    .product-card{
+      background:#fff;
+      border-radius:22px;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      border:1px solid #ededed;
+      transition:0.25s;
+    }
+
+    .product-card:hover{
+      transform:translateY(-8px);
+    }
+
+    .product-image{
+      height:220px;
+      color:#fff;
+      font-size:28px;
+      font-weight:900;
+      display:flex;
+      align-items:flex-end;
+      padding:18px;
+      position:relative;
+    }
+
+    .product-image::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(to top, rgba(0,0,0,0.28), rgba(0,0,0,0.06));
+    }
+
+    .product-image span{
+      position:relative;
+      z-index:1;
+    }
+
+    .img-bricks{background:linear-gradient(135deg, rgba(193,18,31,0.82), rgba(111,10,19,0.74)), linear-gradient(#d7a36d 50%, #c78f55 50%);}
+    .img-cement{background:linear-gradient(135deg, rgba(193,18,31,0.82), rgba(111,10,19,0.74)), linear-gradient(135deg, #bfc3c9, #8c939d);}
+    .img-insulation{background:linear-gradient(135deg, rgba(193,18,31,0.82), rgba(111,10,19,0.74)), linear-gradient(135deg, #f2d24b, #ddbf32);}
+    .img-drill{background:linear-gradient(135deg, rgba(193,18,31,0.82), rgba(111,10,19,0.74)), linear-gradient(135deg, #404852, #14181d);}
+    .img-grinder{background:linear-gradient(135deg, rgba(193,18,31,0.82), rgba(111,10,19,0.74)), linear-gradient(135deg, #59606a, #262b31);}
+    .img-laser{background:linear-gradient(135deg, rgba(193,18,31,0.82), rgba(111,10,19,0.74)), linear-gradient(135deg, #4d5864, #191d21);}
+    .img-excavator{background:linear-gradient(135deg, rgba(193,18,31,0.82), rgba(111,10,19,0.74)), linear-gradient(135deg, #f0ba1a, #ca8f00);}
+    .img-loader{background:linear-gradient(135deg, rgba(193,18,31,0.82), rgba(111,10,19,0.74)), linear-gradient(135deg, #e1ab17, #b88300);}
+    .img-plate{background:linear-gradient(135deg, rgba(193,18,31,0.82), rgba(111,10,19,0.74)), linear-gradient(135deg, #51565d, #22262a);}
+
+    .product-content{
+      padding:22px;
+    }
+
+    .tag{
+      display:inline-block;
+      background:var(--red-light);
+      color:var(--red);
+      padding:7px 12px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:800;
+      margin-bottom:12px;
+    }
+
+    .product-content p{
+      color:var(--muted);
+      margin-bottom:12px;
+      min-height:72px;
+    }
+
+    .price{
+      font-size:24px;
+      font-weight:900;
+      margin-bottom:15px;
+    }
+
+    .price small{
+      display:block;
+      font-size:13px;
+      color:var(--muted);
+      font-weight:700;
+      margin-top:4px;
+    }
+
+    .card-buttons{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+
+    button{
+      border:none;
+      cursor:pointer;
+    }
+
+    .card-btn{
+      background:var(--red);
+      color:#fff;
+      padding:12px 16px;
+      border-radius:999px;
+      font-weight:800;
+      transition:0.2s;
+    }
+
+    .card-btn:hover{
+      background:var(--red-dark);
+    }
+
+    .card-btn.secondary{
+      background:#f0f0f0;
+      color:#333;
+    }
+
+    .card-btn.secondary:hover{
+      background:#e2e2e2;
+    }
+
+    .services-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:20px;
+    }
+
+    .service-box{
+      background:#fff;
+      padding:24px;
+      border-radius:20px;
+      box-shadow:var(--shadow);
+    }
+
+    .service-number{
+      width:46px;
+      height:46px;
+      border-radius:14px;
+      background:var(--red-light);
+      color:var(--red);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:900;
+      margin-bottom:14px;
+    }
+
+    .service-box p{
+      color:var(--muted);
+    }
+
+    .back-link{
+      display:inline-block;
+      margin-top:18px;
+      color:var(--red);
+      font-weight:800;
+    }
+
+    .process{
+      background:linear-gradient(135deg, var(--red), var(--red-dark));
+      color:#fff;
+    }
+
+    .process .section-title span,
+    .process .section-title p{
+      color:#ffe8eb;
+    }
+
+    .process-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:20px;
+    }
+
+    .process-box{
+      background:rgba(255,255,255,0.12);
+      border:1px solid rgba(255,255,255,0.18);
+      border-radius:22px;
+      padding:24px;
+    }
+
+    .step{
+      font-size:34px;
+      font-weight:900;
+      color:#ffd6dc;
+      margin-bottom:10px;
+    }
+
+    .process-box p{
+      color:#ffeef0;
+    }
+
+    /* active element = accordion */
+    .faq-list{
+      max-width:900px;
+      margin:0 auto;
+      display:grid;
+      gap:16px;
+    }
+
+    .faq-item{
+      background:#fff;
+      border-radius:18px;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+    }
+
+    .faq-question{
+      width:100%;
+      background:#fff;
+      text-align:left;
+      padding:20px 22px;
+      font-size:18px;
+      font-weight:800;
+    }
+
+    .faq-answer{
+      display:none;
+      padding:0 22px 20px;
+      color:var(--muted);
+    }
+
+    .faq-item.active .faq-answer{
+      display:block;
+    }
+
+    .contact-grid{
+      display:grid;
+      grid-template-columns:0.9fr 1.1fr;
+      gap:28px;
+      align-items:start;
+    }
+
+    .contact-info{
+      background:linear-gradient(135deg, var(--red), var(--red-dark));
+      color:#fff;
+      border-radius:24px;
+      padding:30px;
+      box-shadow:var(--shadow);
+    }
+
+    .contact-info p{
+      color:#ffe6ea;
+      margin-bottom:18px;
+    }
+
+    .contact-item{
+      background:rgba(255,255,255,0.12);
+      padding:14px 16px;
+      border-radius:16px;
+      margin-bottom:14px;
+    }
+
+    .contact-item strong{
+      display:block;
+      margin-bottom:4px;
+    }
+
+    .form-box{
+      background:#fff;
+      border-radius:24px;
+      padding:30px;
+      box-shadow:var(--shadow);
+    }
+
+    .form-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+
+    .full{
+      grid-column:1 / -1;
+    }
+
+    input, select, textarea{
+      width:100%;
+      padding:14px 15px;
+      border:1px solid #d8d8d8;
+      border-radius:14px;
+      background:#fafafa;
+      font-size:16px;
+      outline:none;
+      transition:0.2s;
+    }
+
+    input:focus, select:focus, textarea:focus{
+      border-color:var(--red);
+      background:#fff;
+      box-shadow:0 0 0 4px rgba(193,18,31,0.08);
+    }
+
+    textarea{
+      min-height:160px;
+      resize:vertical;
+    }
+
+    .submit-btn{
+      background:var(--red);
+      color:#fff;
+      padding:15px 24px;
+      border-radius:999px;
+      font-size:16px;
+      font-weight:800;
+      transition:0.2s;
+    }
+
+    .submit-btn:hover{
+      background:var(--red-dark);
+    }
+
+    #messageBox{
+      margin-top:15px;
+      font-weight:800;
+      color:var(--red);
+    }
+
+    footer{
+      background:#141414;
+      color:#fff;
+      padding:28px 0;
+    }
+
+    .footer-wrap{
+      display:flex;
+      justify-content:space-between;
+      gap:18px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
+    .footer-wrap p{
+      color:#d0d0d0;
+    }
+
+    @media (max-width:1100px){
+      .hero-grid,
+      .about-grid,
+      .contact-grid{
+        grid-template-columns:1fr;
+      }
+
+      .stats-grid,
+      .services-grid,
+      .process-grid{
+        grid-template-columns:repeat(2,1fr);
+      }
+    }
+
+    @media (max-width:900px){
+      .product-grid{
+        grid-template-columns:1fr 1fr;
+      }
+
+      h1{
+        font-size:42px;
+      }
+
+      h2{
+        font-size:34px;
+      }
+    }
+
+    @media (max-width:640px){
+      .menu{
+        gap:12px;
+      }
+
+      .menu a{
+        font-size:14px;
+      }
+
+      .product-grid,
+      .stats-grid,
+      .services-grid,
+      .process-grid,
+      .form-grid,
+      .check-grid{
+        grid-template-columns:1fr;
+      }
+
+      h1{
+        font-size:34px;
+      }
+
+      h2{
+        font-size:28px;
+      }
+
+      .hero{
+        padding:80px 0 70px;
+      }
+    }
+  </style>
+</head>
+<body id="top">
+
+  <header>
+    <div class="container navbar">
+      <div class="logo">STAVION</div>
+
+      <nav class="menu">
+        <a href="#o-nas">O nás</a>
+        <a href="#materialy">Materiály</a>
+        <a href="#naradi">Nářadí</a>
+        <a href="#stroje">Stroje</a>
+        <a href="#faq">FAQ</a>
+        <a href="#kontakt" class="cta">Poptávka</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="hero-badge">Školní projekt | Web stavebnin</div>
+        <h1>Stavebniny, nářadí a technika na přímou poptávku</h1>
+        <p>
+          STAVION je ukázka moderního firemního webu zaměřeného na stavební materiály,
+          nářadí a techniku. Web neobsahuje košík, ale jednoduchý poptávkový systém.
+        </p>
+
+        <div class="hero-buttons">
+          <a href="#materialy" class="btn btn-white">Zobrazit nabídku</a>
+          <a href="#kontakt" class="btn btn-outline">Přejít na formulář</a>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <h3>Co stránka splňuje</h3>
+        <ul>
+          <li>nadpisy více velikostí</li>
+          <li>odkazy na podsekce</li>
+          <li>obrázek na pozadí i přes &lt;img&gt;</li>
+          <li>aktivní prvek – akordeon</li>
+          <li>profesionální rozložení a barvy</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="stats">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat">
+          <h3>9</h3>
+          <p>Ukázkových produktů</p>
+        </div>
+        <div class="stat">
+          <h3>3</h3>
+          <p>Produktové sekce</p>
+        </div>
+        <div class="stat">
+          <h3>4</h3>
+          <p>Služby firmy</p>
+        </div>
+        <div class="stat">
+          <h3>1</h3>
+          <p>FAQ akordeon</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section id="o-nas">
+    <div class="container">
+      <div class="section-title">
+        <span>O společnosti</span>
+        <h2>Profesionální prezentace firmy pro školní projekt</h2>
+        <p>
+          Tato stránka představuje web stavebnin, který obsahuje vše potřebné pro
+          školní zadání i pro dobrý vizuální dojem.
+        </p>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-box">
+          <h3>Proč právě tento návrh</h3>
+          <p>
+            Web kombinuje přehledné sekce, profesionální barvy, jasnou navigaci
+            a jednoduché ovládání. Zákazník si prohlédne nabídku a pomocí formuláře
+            odešle poptávku.
+          </p>
+          <p>
+            Je to vhodné řešení pro firmu, která nechce klasický e-shop, ale chce
+            získávat kontakty a individuální požadavky.
+          </p>
+
+          <div class="check-grid">
+            <div class="check-item">Moderní červeno-bílá paleta</div>
+            <div class="check-item">Přehledné zarovnání prvků</div>
+            <div class="check-item">Funkční interní odkazy</div>
+            <div class="check-item">Aktivní akordeon FAQ</div>
+            <div class="check-item">Karty produktů</div>
+            <div class="check-item">Responzivní layout</div>
+          </div>
+
+          <a class="back-link" href="#top">Zpět nahoru ↑</a>
+        </div>
+
+        <div class="about-image">
+          <!-- image via img tag -->
+          <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1200&q=80" alt="Stavební práce a materiál">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-gray">
+    <div class="container">
+      <div class="section-title">
+        <span>Nabídka</span>
+        <h2>Vybrané produkty na přímou poptávku</h2>
+        <p>
+          Produkty jsou rozdělené do tří hlavních sekcí. Každý produkt lze jedním kliknutím
+          přenést do formuláře.
+        </p>
+      </div>
+
+      <div id="materialy" class="category-head">
+        <h3>Materiály</h3>
+        <p>Stavební materiály pro hrubou stavbu, rekonstrukce i zateplení.</p>
+      </div>
+
+      <div class="product-grid">
+        <article class="product-card">
+          <div class="product-image img-bricks"><span>CIHLY</span></div>
+          <div class="product-content">
+            <span class="tag">Materiál</span>
+            <h3>Cihly Poroblock 30</h3>
+            <p>Nosné cihly vhodné pro obvodové i vnitřní zdivo. Ideální pro rodinné domy a menší stavby.</p>
+            <div class="price">89 Kč / ks<small>Orientační cena bez dopravy</small></div>
+            <div class="card-buttons">
+              <button class="card-btn" onclick="selectProduct('Cihly Poroblock 30 - 89 Kč / ks')">Mám zájem</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-image img-cement"><span>CEMENT</span></div>
+          <div class="product-content">
+            <span class="tag">Materiál</span>
+            <h3>Cement Profi 25 kg</h3>
+            <p>Univerzální cement pro běžné stavební použití, betonování, zdění i drobné opravné práce.</p>
+            <div class="price">145 Kč / pytel<small>Pro malé i větší zakázky</small></div>
+            <div class="card-buttons">
+              <button class="card-btn" onclick="selectProduct('Cement Profi 25 kg - 145 Kč / pytel')">Mám zájem</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-image img-insulation"><span>IZOLACE</span></div>
+          <div class="product-content">
+            <span class="tag">Materiál</span>
+            <h3>Tepelná izolace Thermo 100</h3>
+            <p>Izolační desky vhodné pro fasády, stropy i stěny. Ideální pro novostavby i rekonstrukce.</p>
+            <div class="price">299 Kč / balení<small>Vhodné pro zateplovací systémy</small></div>
+            <div class="card-buttons">
+              <button class="card-btn" onclick="selectProduct('Tepelná izolace Thermo 100 - 299 Kč / balení')">Mám zájem</button>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <a class="back-link" href="#top">Zpět nahoru ↑</a>
+
+      <div id="naradi" class="category-head">
+        <h3>Nářadí</h3>
+        <p>Profesionální vybavení pro stavby, dílny i montážní práce.</p>
+      </div>
+
+      <div class="product-grid">
+        <article class="product-card">
+          <div class="product-image img-drill"><span>VRTAČKA</span></div>
+          <div class="product-content">
+            <span class="tag">Nářadí</span>
+            <h3>Příklepová vrtačka DrillMax</h3>
+            <p>Spolehlivá elektrická vrtačka pro vrtání do zdiva, dřeva i kovu. Vhodná pro pravidelnou práci.</p>
+            <div class="price">1 990 Kč<small>Výkon pro běžné i náročnější použití</small></div>
+            <div class="card-buttons">
+              <button class="card-btn" onclick="selectProduct('Příklepová vrtačka DrillMax - 1 990 Kč')">Mám zájem</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-image img-grinder"><span>BRUSKA</span></div>
+          <div class="product-content">
+            <span class="tag">Nářadí</span>
+            <h3>Úhlová bruska CutPro 125</h3>
+            <p>Univerzální bruska pro řezání kovu, betonu a stavebních prvků. Vhodná na stavbu i do dílny.</p>
+            <div class="price">2 490 Kč<small>Praktický nástroj pro každodenní použití</small></div>
+            <div class="card-buttons">
+              <button class="card-btn" onclick="selectProduct('Úhlová bruska CutPro 125 - 2 490 Kč')">Mám zájem</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-image img-laser"><span>LASER</span></div>
+          <div class="product-content">
+            <span class="tag">Nářadí</span>
+            <h3>Laserový měřič LaserPoint</h3>
+            <p>Přesné měření vzdáleností při stavebních, montážních a dokončovacích pracích v interiéru i exteriéru.</p>
+            <div class="price">1 290 Kč<small>Rychlé a jednoduché měření</small></div>
+            <div class="card-buttons">
+              <button class="card-btn" onclick="selectProduct('Laserový měřič LaserPoint - 1 290 Kč')">Mám zájem</button>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <a class="back-link" href="#top">Zpět nahoru ↑</a>
+
+      <div id="stroje" class="category-head">
+        <h3>Stroje</h3>
+        <p>Technika na prodej nebo zapůjčení podle potřeb zákazníka.</p>
+      </div>
+
+      <div class="product-grid">
+        <article class="product-card">
+          <div class="product-image img-excavator"><span>BAGR</span></div>
+          <div class="product-content">
+            <span class="tag">Stroj</span>
+            <h3>Minibagr ZX17U</h3>
+            <p>Kompaktní minibagr pro výkopové práce, úpravu terénu a menší stavby v omezeném prostoru.</p>
+            <div class="price">485 000 Kč<small>Typ poptávky: koupě</small></div>
+            <div class="card-buttons">
+              <button class="card-btn" onclick="selectProduct('Minibagr ZX17U - 485 000 Kč'); selectInterest('Koupě')">Mám zájem</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-image img-loader"><span>NAKLADAČ</span></div>
+          <div class="product-content">
+            <span class="tag">Stroj</span>
+            <h3>Kolový nakladač WL20</h3>
+            <p>Praktický stroj pro manipulaci s materiálem, nakládku a provoz na menších i větších stavbách.</p>
+            <div class="price">620 000 Kč<small>Typ poptávky: koupě</small></div>
+            <div class="card-buttons">
+              <button class="card-btn" onclick="selectProduct('Kolový nakladač WL20 - 620 000 Kč'); selectInterest('Koupě')">Mám zájem</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-image img-plate"><span>VIBRAČKA</span></div>
+          <div class="product-content">
+            <span class="tag">Stroj</span>
+            <h3>Vibrační deska VP90</h3>
+            <p>Hutnicí technika pro zpevnění povrchů, podkladních vrstev a přípravu pod dlažbu či asfalt.</p>
+            <div class="price">790 Kč / den<small>Typ poptávky: zapůjčení</small></div>
+            <div class="card-buttons">
+              <button class="card-btn" onclick="selectProduct('Vibrační deska VP90 - 790 Kč / den'); selectInterest('Zapůjčení')">Mám zájem</button>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <a class="back-link" href="#top">Zpět nahoru ↑</a>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-title">
+        <span>Služby</span>
+        <h2>Co firma nabízí kromě samotných produktů</h2>
+        <p>
+          Profesionální firemní web by měl ukázat i služby a způsob spolupráce.
+        </p>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-box">
+          <div class="service-number">01</div>
+          <h3>Prodej materiálů</h3>
+          <p>Stavební materiály pro hrubou stavbu, rekonstrukce a dokončovací práce.</p>
+        </div>
+
+        <div class="service-box">
+          <div class="service-number">02</div>
+          <h3>Profesionální nářadí</h3>
+          <p>Vybavení pro řemeslníky, stavební firmy i soukromé zákazníky.</p>
+        </div>
+
+        <div class="service-box">
+          <div class="service-number">03</div>
+          <h3>Stavební technika</h3>
+          <p>Vybrané stroje na přímý prodej i krátkodobé zapůjčení.</p>
+        </div>
+
+        <div class="service-box">
+          <div class="service-number">04</div>
+          <h3>Poptávkové řešení</h3>
+          <p>Jednoduchý formulář bez košíku pro individuální komunikaci se zákazníkem.</p>
+        </div>
+      </div>
+
+      <a class="back-link" href="#top">Zpět nahoru ↑</a>
+    </div>
+  </section>
+
+  <section class="process">
+    <div class="container">
+      <div class="section-title">
+        <span>Jak to funguje</span>
+        <h2>Jednoduchý proces poptávky</h2>
+        <p>
+          Web je navržený tak, aby uživatel rychle našel produkt a bez složitého objednávání odeslal zájem.
+        </p>
+      </div>
+
+      <div class="process-grid">
+        <div class="process-box">
+          <div class="step">01</div>
+          <h3>Vybereš produkt</h3>
+          <p>Klikneš na tlačítko „Mám zájem“ u produktu, který tě zajímá.</p>
+        </div>
+
+        <div class="process-box">
+          <div class="step">02</div>
+          <h3>Produkt se doplní</h3>
+          <p>Vybraný produkt se automaticky přenese do formuláře.</p>
+        </div>
+
+        <div class="process-box">
+          <div class="step">03</div>
+          <h3>Doplníš údaje</h3>
+          <p>Vyplníš kontakt a typ poptávky.</p>
+        </div>
+
+        <div class="process-box">
+          <div class="step">04</div>
+          <h3>Odešleš formulář</h3>
+          <p>Formulář potvrdí odeslání jako funkční ukázka webu.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="section-gray">
+    <div class="container">
+      <div class="section-title">
+        <span>FAQ</span>
+        <h2>Často kladené dotazy</h2>
+        <p>
+          Tohle je aktivní prvek webu — akordeon.
+        </p>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-item active">
+          <button class="faq-question">Je možné produkty koupit přímo online?</button>
+          <div class="faq-answer">
+            Ne. Tato stránka funguje jako poptávkový systém bez košíku. Zákazník si vybere produkt a odešle formulář.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">Jsou uvedené ceny skutečné?</button>
+          <div class="faq-answer">
+            Ceny jsou orientační a slouží jako ukázka pro školní projekt.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">Je web responzivní i na mobilu?</button>
+          <div class="faq-answer">
+            Ano, layout je upravený tak, aby fungoval i na mobilu a tabletu.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">Jak fungují odkazy na sekce?</button>
+          <div class="faq-answer">
+            Navigace nahoře tě přenese na jednotlivé podsekce a odkazy „Zpět nahoru“ tě vrátí na začátek stránky.
+          </div>
+        </div>
+      </div>
+
+      <a class="back-link" href="#top">Zpět nahoru ↑</a>
+    </div>
+  </section>
+
+  <section id="kontakt">
+    <div class="container">
+      <div class="section-title">
+        <span>Kontakt</span>
+        <h2>Poptávkový formulář</h2>
+        <p>
+          Vyber produkt z nabídky nebo napiš vlastní požadavek.
+        </p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h3>STAVION</h3>
+          <p>
+            Moderní stavebniny, profesionální nářadí a stavební technika pro firmy i soukromé zákazníky.
+          </p>
+
+          <div class="contact-item">
+            <strong>Telefon</strong>
+            +420 777 123 456
+          </div>
+
+          <div class="contact-item">
+            <strong>E-mail</strong>
+            info@stavion.cz
+          </div>
+
+          <div class="contact-item">
+            <strong>Adresa</strong>
+            Stavební 128, 700 30 Ostrava
+          </div>
+
+          <div class="contact-item">
+            <strong>Pracovní doba</strong>
+            Po–Pá: 8:00–17:00
+          </div>
+        </div>
+
+        <div class="form-box">
+          <h3>Odeslat poptávku</h3>
+
+          <form id="contactForm">
+            <div class="form-grid">
+              <div>
+                <input type="text" id="name" placeholder="Jméno a příjmení" required>
+              </div>
+              <div>
+                <input type="email" id="email" placeholder="E-mail" required>
+              </div>
+              <div>
+                <input type="tel" id="phone" placeholder="Telefon" required>
+              </div>
+              <div>
+                <select id="interest" required>
+                  <option value="">Vyber typ poptávky</option>
+                  <option>Koupě</option>
+                  <option>Zapůjčení</option>
+                  <option>Více informací</option>
+                </select>
+              </div>
+              <div class="full">
+                <input type="text" id="product" placeholder="Vybraný produkt" required>
+              </div>
+              <div class="full">
+                <textarea id="text" placeholder="Napiš detaily poptávky..." required></textarea>
+              </div>
+              <div class="full">
+                <button type="submit" class="submit-btn">Odeslat poptávku</button>
+                <div id="messageBox"></div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <a class="back-link" href="#top">Zpět nahoru ↑</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-wrap">
+      <div class="logo">STAVION</div>
+      <p>© 2026 STAVION | Školní projekt</p>
+    </div>
+  </footer>
+
+  <script>
+    function selectProduct(productName) {
+      document.getElementById("product").value = productName;
+      document.getElementById("kontakt").scrollIntoView({ behavior: "smooth" });
+    }
+
+    function selectInterest(type) {
+      document.getElementById("interest").value = type;
+    }
+
+    const form = document.getElementById("contactForm");
+    const messageBox = document.getElementById("messageBox");
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const interest = document.getElementById("interest").value.trim();
+      const product = document.getElementById("product").value.trim();
+      const text = document.getElementById("text").value.trim();
+
+      if (!name || !email || !phone || !interest || !product || !text) {
+        messageBox.textContent = "Prosím vyplň všechna pole.";
+        return;
+      }
+
+      messageBox.textContent = "Poptávka byla úspěšně odeslána.";
+      form.reset();
+    });
+
+    const faqQuestions = document.querySelectorAll(".faq-question");
+
+    faqQuestions.forEach(button => {
+      button.addEventListener("click", () => {
+        const item = button.parentElement;
+        item.classList.toggle("active");
+      });
+    });
+  </script>
+</body>
+</html>
